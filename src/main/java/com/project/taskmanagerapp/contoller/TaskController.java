@@ -2,10 +2,7 @@ package com.project.taskmanagerapp.contoller;
 
 import com.project.taskmanagerapp.model.Task;
 import com.project.taskmanagerapp.service.TaskService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,5 +23,10 @@ public class TaskController {
     @PostMapping("/tasks")
     public void addTasks(@RequestBody Task task) {
         taskService.addTasks(task);
+    }
+
+    @PutMapping("/tasks")
+    public void editTask(@RequestBody Task inputData) {
+        taskService.editTask(inputData);
     }
 }

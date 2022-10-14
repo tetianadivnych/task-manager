@@ -10,6 +10,9 @@ public class Task {
     private Long id;
     private String taskName;
     private String taskOwner;
+    private String taskDescription;
+    private String taskPriority;
+
 
     public void setId(Long id) {
         this.id = id;
@@ -33,6 +36,22 @@ public class Task {
 
     public String getTaskOwner() {
         return taskOwner;
+    }
+
+    public String getDescription() {
+        return taskDescription;
+    }
+
+    public void setDescription(String description) {
+        this.taskDescription = description;
+    }
+
+    public String getPriority() {
+        return taskPriority;
+    }
+
+    public void setPriority(String priority) {
+        this.taskPriority = priority;
     }
 
 }

@@ -5,7 +5,7 @@ import com.project.taskmanagerapp.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.NoSuchElementException;
 
 @Service
 public class TaskService {
@@ -24,8 +24,7 @@ public class TaskService {
     }
 
     public void editTask(Task inputData) {
-        Optional<Task> taskId = taskRepository.findById(inputData.getId());
-        Task task = taskId.get();
+        Task task = taskRepository.findById(inputData.getId()).orElseThrow(() -> new NoSuchElementException());
         task.setTaskName(inputData.getTaskName());
         task.setDescription(inputData.getDescription());
         task.setPriority(inputData.getPriority());

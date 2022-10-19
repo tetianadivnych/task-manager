@@ -25,8 +25,6 @@ public class TaskService {
     }
 
     public void addTasks(TaskRequest taskRequest) {
-        //check if a user with this email exists as a registered user
-        //if yes, set this user (his email) as a task owner and save the task
         User registeredUser = userRepository.findByEmail(taskRequest.getUserEmail())
                 .orElseThrow(NoSuchElementException::new);
         Task task = new Task();

@@ -1,6 +1,7 @@
 package com.project.taskmanagerapp.model;
 
 public class TaskRequest {
+
     private String userEmail;
     private String taskName;
     private String taskDescription;

@@ -1,6 +1,7 @@
 package com.project.taskmanagerapp.contoller;
 
 import com.project.taskmanagerapp.model.Task;
+import com.project.taskmanagerapp.model.TaskRequest;
 import com.project.taskmanagerapp.service.TaskService;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,8 +22,8 @@ public class TaskController {
     }
 
     @PostMapping("/tasks")
-    public void addTasks(@RequestBody Task task) {
-        taskService.addTasks(task);
+    public void addTasks(@RequestBody TaskRequest taskRequest) {
+        taskService.addTasks(taskRequest);
     }
 
     @PutMapping("/tasks")

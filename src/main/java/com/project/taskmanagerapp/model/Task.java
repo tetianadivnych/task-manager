@@ -1,18 +1,19 @@
 package com.project.taskmanagerapp.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Task {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String taskName;
-    private String taskOwner;
+    @ManyToOne
+    @JoinColumn(name = "task_owner")
+    private User taskOwner;
     private String taskDescription;
     private String taskPriority;
-
 
     public void setId(Long id) {
         this.id = id;
@@ -20,10 +21,6 @@ public class Task {
 
     public void setTaskName(String taskName) {
         this.taskName = taskName;
-    }
-
-    public void setTaskOwner(String taskOwner) {
-        this.taskOwner = taskOwner;
     }
 
     public Long getId() {
@@ -34,8 +31,11 @@ public class Task {
         return taskName;
     }
 
-    public String getTaskOwner() {
+    public User getTaskOwner() {
         return taskOwner;
+    }
+    public void setTaskOwner(User taskOwner) {
+        this.taskOwner = taskOwner;
     }
 
     public String getDescription() {

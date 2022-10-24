@@ -5,6 +5,7 @@ import com.project.taskmanagerapp.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 
 @Service
@@ -24,4 +25,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public User getUserById(Long userId) {
+        return userRepository.findById(userId).orElseThrow(NoSuchElementException::new);
+    }
 }

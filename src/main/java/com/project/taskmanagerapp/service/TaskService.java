@@ -12,6 +12,7 @@ import java.util.NoSuchElementException;
 
 @Service
 public class TaskService {
+
     private final TaskRepository taskRepository;
     private final UserRepository userRepository;
 
@@ -20,13 +21,13 @@ public class TaskService {
         this.userRepository = userRepository;
     }
 
+
     public List<Task> getTasks() {
         return taskRepository.findAll();
     }
 
     public void addTasks(TaskRequest taskRequest) {
-        User registeredUser = userRepository.findByEmail(taskRequest.getUserEmail())
-                .orElseThrow(NoSuchElementException::new);
+        User registeredUser = userRepository.findByEmail(taskRequest.getUserEmail()).orElseThrow(NoSuchElementException::new);
         Task task = new Task();
         task.setTaskOwner(registeredUser);
         task.setTaskName(taskRequest.getTaskName());
@@ -48,4 +49,7 @@ public class TaskService {
         taskRepository.deleteById(id);
     }
 
+    public Task getTaskById(Long taskId) {
+        return taskRepository.findById(taskId).orElseThrow(NoSuchElementException::new);
+    }
 }

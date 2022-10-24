@@ -1,6 +1,7 @@
 package com.project.taskmanagerapp.model;
 
 public class SharedTaskRequest {
+
     private Long taskId;
     private Long userId;
 

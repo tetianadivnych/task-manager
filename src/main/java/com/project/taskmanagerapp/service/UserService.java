@@ -1,11 +1,11 @@
 package com.project.taskmanagerapp.service;
 
+import com.project.taskmanagerapp.exception.CustomEntityNotFoundException;
 import com.project.taskmanagerapp.model.User;
 import com.project.taskmanagerapp.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 
 @Service
@@ -26,6 +26,8 @@ public class UserService {
     }
 
     public User getUserById(Long userId) {
-        return userRepository.findById(userId).orElseThrow(NoSuchElementException::new);
+        return userRepository.findById(userId)
+                .orElseThrow(()-> new CustomEntityNotFoundException("User with id: " + userId + " not found"));
     }
+
 }

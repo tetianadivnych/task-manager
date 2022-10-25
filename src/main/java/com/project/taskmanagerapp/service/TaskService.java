@@ -1,34 +1,57 @@
 package com.project.taskmanagerapp.service;
 
 import com.project.taskmanagerapp.exception.CustomEntityNotFoundException;
-import com.project.taskmanagerapp.model.Task;
-import com.project.taskmanagerapp.model.TaskRequest;
-import com.project.taskmanagerapp.model.User;
+import com.project.taskmanagerapp.model.*;
 import com.project.taskmanagerapp.repository.TaskRepository;
-import com.project.taskmanagerapp.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TaskService {
 
     private final TaskRepository taskRepository;
-    private final UserRepository userRepository;
 
-    public TaskService(TaskRepository taskRepository, UserRepository userRepository) {
+    private final UserService userService;
+
+    public TaskService(TaskRepository taskRepository, UserService userService) {
         this.taskRepository = taskRepository;
-        this.userRepository = userRepository;
+        this.userService = userService;
     }
 
 
-    public List<Task> getTasks() {
-        return taskRepository.findAll();
+    public List<TaskResponse> getTasks() {
+        List<Task> tasks = taskRepository.findAll();
+        return tasks.stream()
+                .map(task -> convertTask(task))
+                .collect(Collectors.toList());
+    }
+
+    private TaskResponse convertTask(Task task) {
+        TaskResponse response = new TaskResponse();
+        response.setTaskName(task.getTaskName());
+        response.setTaskOwner(convertUser(task.getTaskOwner()));
+        response.setTaskParticipants(getListOfUsers(task.getSharedTasks()));
+        return response;
+    }
+
+    private UserResponse convertUser(User user) {
+        UserResponse response = new UserResponse();
+        response.setUserId(user.getId());
+        response.setUserEmail(user.getEmail());
+        return response;
+    }
+
+    private List<UserResponse> getListOfUsers(List<SharedTask> sharedTasks) {
+        return sharedTasks.stream()
+                .map(sharedTask -> sharedTask.getUser())
+                .map(user -> convertUser(user))
+                .collect(Collectors.toList());
     }
 
     public void addTasks(TaskRequest taskRequest) {
-        User registeredUser = userRepository.findByEmail(taskRequest.getUserEmail())
-                .orElseThrow(()-> new CustomEntityNotFoundException("User with email: " + taskRequest.getUserEmail() + " not found"));
+        User registeredUser = userService.getUserByEmail(taskRequest.getUserEmail());
         Task task = new Task();
         task.setTaskOwner(registeredUser);
         task.setTaskName(taskRequest.getTaskName());
@@ -52,7 +75,7 @@ public class TaskService {
 
     public Task getTaskById(Long taskId) {
         return taskRepository.findById(taskId)
-                .orElseThrow(()-> new CustomEntityNotFoundException("Task with id: " + taskId + "  not found"));
+                .orElseThrow(() -> new CustomEntityNotFoundException("Task with id: " + taskId + "  not found"));
     }
 
 }

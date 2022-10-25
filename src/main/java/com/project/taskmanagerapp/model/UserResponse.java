@@ -1,16 +1,16 @@
 package com.project.taskmanagerapp.model;
 
-public class SharedTaskRequest {
+public class UserResponse {
 
-    private Long taskId;
+    private Long userId;
     private String userEmail;
 
-    public Long getTaskId() {
-        return taskId;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setTaskId(Long taskId) {
-        this.taskId = taskId;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getUserEmail() {

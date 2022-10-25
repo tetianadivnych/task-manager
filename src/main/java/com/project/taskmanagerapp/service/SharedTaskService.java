@@ -22,7 +22,7 @@ public class SharedTaskService {
 
 
     public void shareTask(SharedTaskRequest sharedTaskRequest) {
-        User existingUser = userService.getUserById(sharedTaskRequest.getUserId());
+        User existingUser = userService.getUserByEmail(sharedTaskRequest.getUserEmail());
         Task existingTask = taskService.getTaskById(sharedTaskRequest.getTaskId());
         SharedTask sharedTask = new SharedTask();
         sharedTask.setTask(existingTask);

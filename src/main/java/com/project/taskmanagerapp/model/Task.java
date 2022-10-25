@@ -1,6 +1,8 @@
 package com.project.taskmanagerapp.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Task {
@@ -14,6 +16,8 @@ public class Task {
     private User taskOwner;
     private String taskDescription;
     private String taskPriority;
+    @OneToMany (mappedBy = "task")
+    private List<SharedTask> sharedTasks = new ArrayList<>();
 
     public void setId(Long id) {
         this.id = id;
@@ -54,4 +58,21 @@ public class Task {
         this.taskPriority = priority;
     }
 
+    public List<SharedTask> getSharedTasks() {
+        return sharedTasks;
+    }
+
+    public void setSharedTasks(List<SharedTask> sharedTasks) {
+        this.sharedTasks = sharedTasks;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", taskName='" + taskName + '\'' +
+                ", taskDescription='" + taskDescription + '\'' +
+                ", taskPriority='" + taskPriority + '\'' +
+                '}';
+    }
 }

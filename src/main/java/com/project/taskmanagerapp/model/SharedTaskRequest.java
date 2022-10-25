@@ -3,7 +3,7 @@ package com.project.taskmanagerapp.model;
 public class SharedTaskRequest {
 
     private Long taskId;
-    private Long userId;
+    private String userEmail;
 
     public Long getTaskId() {
         return taskId;
@@ -13,12 +13,11 @@ public class SharedTaskRequest {
         this.taskId = taskId;
     }
 
-    public Long getUserId() {
-        return userId;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
-
 }

@@ -30,4 +30,9 @@ public class UserService {
                 .orElseThrow(()-> new CustomEntityNotFoundException("User with id: " + userId + " not found"));
     }
 
+    public User getUserByEmail(String userEmail) {
+        return  userRepository.findByEmail(userEmail)
+                .orElseThrow(()-> new CustomEntityNotFoundException("User with email: " + userEmail + " not found"));
+    }
+
 }

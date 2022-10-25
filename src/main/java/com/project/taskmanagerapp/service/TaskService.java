@@ -1,7 +1,10 @@
 package com.project.taskmanagerapp.service;
 
 import com.project.taskmanagerapp.exception.CustomEntityNotFoundException;
-import com.project.taskmanagerapp.model.*;
+import com.project.taskmanagerapp.model.Task;
+import com.project.taskmanagerapp.model.TaskRequest;
+import com.project.taskmanagerapp.model.TaskResponse;
+import com.project.taskmanagerapp.model.User;
 import com.project.taskmanagerapp.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
@@ -23,29 +26,7 @@ public class TaskService {
     public List<TaskResponse> getTasks() {
         List<Task> tasks = taskRepository.findAll();
         return tasks.stream()
-                .map(task -> convertTask(task))
-                .collect(Collectors.toList());
-    }
-
-    private TaskResponse convertTask(Task task) {
-        TaskResponse response = new TaskResponse();
-        response.setName(task.getTaskName());
-        response.setOwner(convertUser(task.getTaskOwner()));
-        response.setParticipants(getListOfUsers(task.getSharedTasks()));
-        return response;
-    }
-
-    private UserResponse convertUser(User user) {
-        UserResponse response = new UserResponse();
-        response.setId(user.getId());
-        response.setEmail(user.getEmail());
-        return response;
-    }
-
-    private List<UserResponse> getListOfUsers(List<SharedTask> sharedTasks) {
-        return sharedTasks.stream()
-                .map(sharedTask -> sharedTask.getUser())
-                .map(user -> convertUser(user))
+                .map(task -> EntityConverter.convertTask(task))
                 .collect(Collectors.toList());
     }
 

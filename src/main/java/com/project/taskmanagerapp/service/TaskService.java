@@ -20,7 +20,6 @@ public class TaskService {
         this.userService = userService;
     }
 
-
     public List<TaskResponse> getTasks() {
         List<Task> tasks = taskRepository.findAll();
         return tasks.stream()
@@ -30,16 +29,16 @@ public class TaskService {
 
     private TaskResponse convertTask(Task task) {
         TaskResponse response = new TaskResponse();
-        response.setTaskName(task.getTaskName());
-        response.setTaskOwner(convertUser(task.getTaskOwner()));
-        response.setTaskParticipants(getListOfUsers(task.getSharedTasks()));
+        response.setName(task.getTaskName());
+        response.setOwner(convertUser(task.getTaskOwner()));
+        response.setParticipants(getListOfUsers(task.getSharedTasks()));
         return response;
     }
 
     private UserResponse convertUser(User user) {
         UserResponse response = new UserResponse();
-        response.setUserId(user.getId());
-        response.setUserEmail(user.getEmail());
+        response.setId(user.getId());
+        response.setEmail(user.getEmail());
         return response;
     }
 

@@ -1,34 +1,35 @@
 package com.project.taskmanagerapp.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TaskResponse {
 
-    private String taskName;
-    private UserResponse taskOwner;
-    private List<UserResponse> taskParticipants;
+    private String name;
+    private UserResponse owner;
+    private List<UserResponse> participants = new ArrayList<>();
 
-    public String getTaskName() {
-        return taskName;
+    public String getName() {
+        return name;
     }
 
-    public void setTaskName(String taskName) {
-        this.taskName = taskName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public UserResponse getTaskOwner() {
-        return taskOwner;
+    public UserResponse getOwner() {
+        return owner;
     }
 
-    public void setTaskOwner(UserResponse taskOwner) {
-        this.taskOwner = taskOwner;
+    public void setOwner(UserResponse owner) {
+        this.owner = owner;
     }
 
-    public List<UserResponse> getTaskParticipants() {
-        return taskParticipants;
+    public List<UserResponse> getParticipants() {
+        return participants;
     }
 
-    public void setTaskParticipants(List<UserResponse> taskParticipants) {
-        this.taskParticipants = taskParticipants;
+    public void setParticipants(List<UserResponse> participants) {
+        this.participants = participants;
     }
 }

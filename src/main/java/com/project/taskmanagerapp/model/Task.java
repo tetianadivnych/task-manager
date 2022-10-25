@@ -16,7 +16,7 @@ public class Task {
     private User taskOwner;
     private String taskDescription;
     private String taskPriority;
-    @OneToMany (mappedBy = "task")
+    @OneToMany(mappedBy = "task")
     private List<SharedTask> sharedTasks = new ArrayList<>();
 
     public void setId(Long id) {
@@ -38,6 +38,7 @@ public class Task {
     public User getTaskOwner() {
         return taskOwner;
     }
+
     public void setTaskOwner(User taskOwner) {
         this.taskOwner = taskOwner;
     }
@@ -66,13 +67,4 @@ public class Task {
         this.sharedTasks = sharedTasks;
     }
 
-    @Override
-    public String toString() {
-        return "Task{" +
-                "id=" + id +
-                ", taskName='" + taskName + '\'' +
-                ", taskDescription='" + taskDescription + '\'' +
-                ", taskPriority='" + taskPriority + '\'' +
-                '}';
-    }
 }

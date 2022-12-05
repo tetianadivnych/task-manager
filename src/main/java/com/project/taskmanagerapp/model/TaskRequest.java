@@ -5,7 +5,7 @@ public class TaskRequest {
     private String userEmail;
     private String taskName;
     private String taskDescription;
-    private String taskPriority;
+    private Priority taskPriority;
 
     public String getUserEmail() {
         return userEmail;
@@ -31,11 +31,4 @@ public class TaskRequest {
         this.taskDescription = taskDescription;
     }
 
-    public String getTaskPriority() {
-        return taskPriority;
-    }
-
-    public void setTaskPriority(String taskPriority) {
-        this.taskPriority = taskPriority;
-    }
 }

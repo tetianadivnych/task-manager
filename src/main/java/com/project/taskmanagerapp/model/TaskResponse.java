@@ -9,6 +9,8 @@ public class TaskResponse {
     private UserResponse owner;
     private List<UserResponse> participants = new ArrayList<>();
 
+    private Priority priority;
+
     public String getName() {
         return name;
     }
@@ -31,5 +33,13 @@ public class TaskResponse {
 
     public void setParticipants(List<UserResponse> participants) {
         this.participants = participants;
+    }
+
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 }

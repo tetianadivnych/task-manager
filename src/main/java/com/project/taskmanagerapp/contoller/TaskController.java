@@ -2,7 +2,8 @@ package com.project.taskmanagerapp.contoller;
 
 import com.project.taskmanagerapp.model.Task;
 import com.project.taskmanagerapp.model.TaskRequest;
-import com.project.taskmanagerapp.model.TaskResponse;
+import com.project.taskmanagerapp.model.TaskWithSubtaskRequest;
+import com.project.taskmanagerapp.model.TaskWithSubtasksResponse;
 import com.project.taskmanagerapp.service.TaskService;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,9 +18,20 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @GetMapping("/tasks")
-    public List<TaskResponse> getTasks() {
-        return taskService.getTasks();
+//    @GetMapping("/tasks")
+//    public List<TaskResponse> getTasks() {
+//        return taskService.getTasks();
+//    }
+
+
+    @PutMapping ("/subtasks")
+    public void addSubtask(@RequestBody TaskWithSubtaskRequest taskWithSubtaskRequest) {
+        taskService.addSubtask(taskWithSubtaskRequest);
+    }
+
+    @GetMapping("/subtasks")
+    public List<TaskWithSubtasksResponse> getTasksWithSubtasks() {
+        return taskService.getTasksWithSubtasks();
     }
 
     @PostMapping("/tasks")

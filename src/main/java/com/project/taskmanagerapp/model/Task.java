@@ -15,9 +15,13 @@ public class Task {
     @JoinColumn(name = "task_owner")
     private User taskOwner;
     private String taskDescription;
-    private String taskPriority;
+    @Enumerated(EnumType.STRING)
+    private Priority taskPriority;
     @OneToMany(mappedBy = "task")
     private List<SharedTask> sharedTasks = new ArrayList<>();
+
+    @OneToMany(mappedBy = "task")
+    private List<Subtask> subtasks = new ArrayList<>();
 
     public void setId(Long id) {
         this.id = id;
@@ -51,13 +55,6 @@ public class Task {
         this.taskDescription = description;
     }
 
-    public String getPriority() {
-        return taskPriority;
-    }
-
-    public void setPriority(String priority) {
-        this.taskPriority = priority;
-    }
 
     public List<SharedTask> getSharedTasks() {
         return sharedTasks;
@@ -67,4 +64,32 @@ public class Task {
         this.sharedTasks = sharedTasks;
     }
 
+    public List<Subtask> getSubtasks() {
+        return subtasks;
+    }
+
+    public void setSubtasks(List<Subtask> subtasks) {
+        this.subtasks = subtasks;
+    }
+
+    public Priority getTaskPriority() {
+        return taskPriority;
+    }
+
+    public void setTaskPriority(Priority taskPriority) {
+        this.taskPriority = taskPriority;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", taskName='" + taskName + '\'' +
+                ", taskOwner=" + taskOwner +
+                ", taskDescription='" + taskDescription + '\'' +
+                ", taskPriority=" + taskPriority +
+                ", sharedTasks=" + sharedTasks +
+                ", subtasks=" + subtasks +
+                '}';
+    }
 }
